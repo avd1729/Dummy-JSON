@@ -1,6 +1,6 @@
 # Dummy JSON
 
-This is a simple microservices website that allows users to retrieve recipes and products from different microservices.
+The project is a microservices-based web application that provides users with access to recipes and products. It consists of multiple components, including a Recipe Microservice and a Product Microservice, each responsible for handling specific functionalities. These microservices are built using Flask, a Python web framework, and are deployed as Docker containers. The front end of the application is an HTML page that communicates with the microservices via RESTful APIs. Users can retrieve recipe and product data by interacting with the web interface. The project demonstrates the use of microservices architecture, containerization with Docker, and RESTful API design principles.
 
 ## Features
 
