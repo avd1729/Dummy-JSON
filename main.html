@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+        #dataContainer {
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        li:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Dummy JSON Website!</h1>
+    <div id="dataContainer"></div>
+
+    <button onclick="getRecipes()">Get Recipes</button>
+    <button onclick="getProducts()">Get Products</button>
+
+    <script>
+        async function getRecipes() {
+            try {
+                const response = await fetch('http://localhost:5001/recipes', {
+                    method: 'GET'
+                });
+
+                console.log('Response:', response);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch recipes');
+                }
+
+                const data = await response.json();
+                displayRecipes(data);
+            } catch (error) {
+                console.error('Error:', error.message);
+            }
+        }
+
+        async function getProducts() {
+            try {
+                const response = await fetch('http://localhost:5000/products', {
+                    method: 'GET'
+                });
+
+                console.log('Response:', response);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+
+                const data = await response.json();
+                displayProducts(data);
+            } catch (error) {
+                console.error('Error:', error.message);
+            }
+        }
+
+        function displayRecipes(data) {
+            const dataContainer = document.getElementById('dataContainer');
+            dataContainer.innerHTML = ''; // Clear previous content
+            const dataList = document.createElement('ul');
+            dataContainer.appendChild(dataList);
+
+            // Iterate over each recipe and create a list item for it
+            data.data.forEach(recipe => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `ID: ${recipe.id}, Name: ${recipe.name}, Ingredients: ${recipe.ingredients}, Instructions: ${recipe.instructions}, Prep Time (minutes): ${recipe.prepTimeMinutes}, Cook Time (minutes): ${recipe.cookTimeMinutes}, Servings: ${recipe.servings}, Difficulty: ${recipe.difficulty}, Cuisine: ${recipe.cuisine}`;
+                dataList.appendChild(listItem);
+            });
+        }
+
+        function displayProducts(data) {
+            const dataContainer = document.getElementById('dataContainer');
+            dataContainer.innerHTML = ''; // Clear previous content
+            const dataList = document.createElement('ul');
+            dataContainer.appendChild(dataList);
+
+            // Iterate over each product and create a list item for it
+            data.data.forEach(product => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `ID: ${product.id}, Title: ${product.title}, Brand: ${product.brand}, Price: ${product.price}, Description: ${product.description}`;
+                dataList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
