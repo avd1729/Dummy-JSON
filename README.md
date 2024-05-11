@@ -26,36 +26,35 @@ Before running the project, ensure you have the following installed:
 2. Navigate to the project directory:
 
    ```bash
-   cd microservices-website
+   cd Dummy-JSON
    ```
 
-3. Install dependencies:
+3. Build the Docker image:
 
    ```bash
-   pip install -r requirements.txt
+   docker build -t microservices-website .
    ```
 
-4. Ensure the Recipes microservice is running. If not, clone the repository and follow the instructions in its README file to start the service.
+4. Run the Docker container:
+
+   ```bash
+   docker run -p 5002:5002 microservices-website
+   ```
+5. Ensure the Recipes microservice is running. If not, clone the repository and follow the instructions in its README file to start the service.
 
    Repository URL: [Recipes Microservice](https://github.com/avd1729/Recipe-Microservice)
 
-5. Ensure the Products microservice is running. If not, clone the repository and follow the instructions in its README file to start the service.
+6. Ensure the Products microservice is running. If not, clone the repository and follow the instructions in its README file to start the service.
 
    Repository URL: [Products Microservice](https://github.com/avd1729/Product-Microservice)
 
 ## Usage
 
-1. Start the Flask server:
+1. Open your web browser and navigate to [http://localhost:5002/](http://localhost:5002/).
 
-   ```bash
-   python app.py
-   ```
+2. Click the "Get Recipes" button to retrieve recipes from the Recipes microservice.
 
-2. Open your web browser and navigate to [http://localhost:5002/](http://localhost:5002/).
-
-3. Click the "Get Recipes" button to retrieve recipes from the Recipes microservice.
-
-4. Click the "Get Products" button to retrieve products from the Products microservice.
+3. Click the "Get Products" button to retrieve products from the Products microservice.
 
 ## Contributing
 
